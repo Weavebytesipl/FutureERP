@@ -8,7 +8,7 @@ class Product(models.Model):
     product model for the items etc.
     """
     name = models.CharField(max_length=64)
-    description = models.CharField(max_length=20, unique=True)
+    description = models.CharField(max_length=1024, unique=True)
     wholesale_price = models.PositiveIntegerField(default=0)
     retail_price = models.PositiveIntegerField(default=0)
     img = models.ImageField(upload_to = 'prod_imgs/', default = 'prod_imgs/default.png')
