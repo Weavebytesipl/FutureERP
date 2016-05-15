@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # futureerp apps
     'dashboard.apps.DashboardConfig',
     'common.apps.CommonConfig',
+    'notes.apps.NotesConfig',
 
     # django apps
     'django.contrib.admin',
