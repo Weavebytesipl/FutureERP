@@ -35,7 +35,12 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # NOTE: grappelli app should be added before adding admin
     'grappelli',
+
+    # futureerp apps
     'dashboard.apps.DashboardConfig',
+    'common.apps.CommonConfig',
+
+    # django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
