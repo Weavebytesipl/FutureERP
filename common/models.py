@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Product(models.Model):
@@ -19,3 +20,32 @@ class Product(models.Model):
         function returns unicode representation of a product
         """
         return self.name
+
+
+class Customer(models.Model):
+    """
+    customer model for the various module of future erp
+    """
+    user = models.OneToOneField(User)
+
+    def __unicode__(self):
+        """
+        function returns unicode representation of a product
+        """
+        return "%s" % self.user
+
+
+class Staff(models.Model):
+    """
+    staff model for the various module of future erp
+    """
+    user = models.OneToOneField(User)
+
+    def __unicode__(self):
+        """
+        function returns unicode representation of a product
+        """
+        return "%s" % self.user
+
+    class Meta:
+        verbose_name_plural = "staff"
