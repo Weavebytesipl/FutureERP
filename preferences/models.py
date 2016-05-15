@@ -10,7 +10,14 @@ class Preference(SingletonModel):
     storing user preferences
     """
 
+    website_title = models.CharField(max_length=128)
     enable_logistics = models.BooleanField(default=True)
     enable_point_of_sale = models.BooleanField(default=True)
     enable_retail = models.BooleanField(default=True)
     enable_notes = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        """
+        function returns unicode representation of a preferences
+        """
+        return "%s Preferences" % self.website_title
