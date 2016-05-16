@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'dashboard.apps.DashboardConfig',
     'common.apps.CommonConfig',
     'notes.apps.NotesConfig',
+	'pos.apps.PosConfig',	
     'preferences.apps.PreferencesConfig',
 
     # django apps
