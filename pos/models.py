@@ -70,7 +70,7 @@ class Payment(models.Model):
 		"""
 		function returns unicode representation of payment 
 		"""
-		return "%d" % self.method
+		return "%s" % self.method
 
 
 class ProductInTransaction(models.Model):
