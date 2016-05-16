@@ -1,23 +1,28 @@
 # FutureERP
-ERP project covering various modules like payroll, point of sales, calendar, asset management, employee etc
+ERP project covering various modules like payroll, point of sales, calendar, asset management, employees etc
 
-# Common 
+#### Common 
 
  A common module for common models like customer, product etc to be used by other modules/apps of django.
 
-# Logistcis
+#### Logistcis Module
  
-  ToDo
+ This module handles shipments, products, locations etc.
+ 
+#### Point Of Sales Module
 
-# Point Of Sales
+  This module handles customers, staff, products, payments, outlets etc.
 
-  ToDo
+#### Retail Module
 
-# Retail
+  This module handles suppliers, customers, staff, products, payments  etc.
 
-  ToDo
+#### Preferences Module
 
+This is used for storing personal preferences of user for dashboard in database.
 
-# About Us
+#### About Us
 
-  Weavebytes is an emerging innovative startup incorporating open source geeks (*_*)
+  Weavebytes is an emerging innovative startup incorporating open source geeks.
+  We take pride in development of open source projects. Also there projects cleary manifests our skills.
+  We are providing services in python and django development.
