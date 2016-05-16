@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% comment %}
+
+Registration page for user
+
+{% endcomment %}
+
+{% block head %}
+<title>Register User</title>
+<script type="text/javascript">
+    $(window).load(function(){
+            $('#RegisterModal').modal('show');
+            });
+        </script>
+        {% endblock %}
+
+        {% block body %}
+        <h5>Register</h5>
+
+        <section>
+        {% if form.errors %}
+        <p style="color:red">Your username and password didn't match, please try again.</p>
+        {% endif %}
+
+        <!-- !!!!!!!!!!!!!! REGISTER MODAL BEGINS HERE !!!!!!!!!!!!!-->
+        <div class="modal fade" id="RegisterModal" tabindex="-1" 
+            role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+            <div class="modal-dialog">      
+                <div class="modal-content">
+
+                    <!-- add header of popup here -->
+                    <div class="modal-header">
+                        <button type="button" class="close" 
+                            data-dismiss="modal">
+                            <span aria-hidden="true">&times;
+                                </span><span class="sr-only">
+                                Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Register</h4>
+                    </div>
+                    <!-- end header of popup here -->
+
+                    <!-- add body of popup here -->
+                    <div class="modal-body">
+
+                        <!-- <p style="color:red"> {{ state }} </p> -->
+                        <form method="post" action=".">{% csrf_token %}
+
+                            {% if form.non_field_errors %}
+                            <p class="error">
+                            {% for error in form.non_field_errors %}
+                            {{ error }}
+                            {% endfor %}
+                            </p>
+                            {% endif %}
+
+                            {% for field in form %}
+                            <div class="form-group">
+                                <!-- Render the field label tag -->
+                                {{ field.label_tag }}
+                                <!-- If the field is required, display a * next to the field label -->
+                                {% if field.field.required %}
+                                *
+                                {% endif %}
+                                <br/>
+                                <!-- Render the input field -->
+                                {{ field }}
+                                <!-- Iterate over the field's errors, if any and display
+                                them one by one in a error alert
+                                -->
+                                {% if field.errors %}
+                                <p class="error">
+                                {% for error in field.errors %}
+                                {{ error }}
+                                {% endfor %}
+                                </p>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                            <button class="btn btn-primary" type="submit">Register</button>
+                        </form>
+
+                    </div>
+                    <!-- end body of popup here -->
+
+                    <div class="modal-footer">
+                        Your already have an account ? Then click here to <a class="btn btn-inverse" href="/login/">Login</a> now !
+                        <button type="button" 
+                            class="btn btn-default" data-dismiss="modal">
+                            Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- !!!!!!!!!!!!!! REGISTER MODAL ENDS HERE !!!!!!!!!!!!!-->
+        {% endblock %}
