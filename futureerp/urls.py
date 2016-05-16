@@ -17,9 +17,13 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 import dashboard.views as dashboard_views
+import reg.views as reg_views
 
 urlpatterns = [
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^$', dashboard_views.home, name='home'),
+
+    # registration
+    url(r'register/$', reg_views.regform, name='regform'),
 ]
