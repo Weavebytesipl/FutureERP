@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'pos.apps.PosConfig',	
     'reg.apps.RegConfig',	
     'preferences.apps.PreferencesConfig',
+    'api.apps.ApiConfig',
 
     # django apps
     'django.contrib.admin',
