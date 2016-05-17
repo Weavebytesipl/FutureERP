@@ -15,9 +15,28 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth.models import User
 
 import dashboard.views as dashboard_views
 import reg.views as reg_views
+
+from rest_framework import routers, serializers, viewsets
+
+
+# serializers define the api representation.
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ('url', 'username', 'email', 'is_staff')
+
+# ViewSets define the view behavior.
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+# routers provide an easy way of automatically determining the url conf.
+router = routers.DefaultRouter()
+router.register(r'users', UserViewSet)
 
 urlpatterns = [
     url(r'^grappelli/', include('grappelli.urls')),
@@ -26,4 +45,7 @@ urlpatterns = [
 
     # registration
     url(r'register/$', reg_views.regform, name='regform'),
+
+    # django rest framework urls
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
