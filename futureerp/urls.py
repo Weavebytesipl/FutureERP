@@ -19,6 +19,7 @@ from django.contrib.auth.models import User
 
 import dashboard.views as dashboard_views
 import reg.views as reg_views
+import api.views as api_views
 
 from rest_framework import routers, serializers, viewsets
 
@@ -48,4 +49,6 @@ urlpatterns = [
 
     # django rest framework urls
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^products/$', api_views.product_list),
+    url(r'^products/(?P<pk>[0-9]+)/$', api_views.product_detail),
 ]
