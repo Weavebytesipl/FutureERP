@@ -44,6 +44,12 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', dashboard_views.home, name='home'),
 
+    # auth URL confs
+    url(r'^login/$', dashboard_views.login_page, name='login_page'),
+    url(r'^logout/$', dashboard_views.logout_page, name='logout_page'),
+    url(r'^accounts/logout/$', dashboard_views.logout_page, name='logout_page'),
+    url(r'^accounts/login/$', dashboard_views.login_page, name='login_page'),
+
     # registration
     url(r'register/$', reg_views.regform, name='regform'),
 
