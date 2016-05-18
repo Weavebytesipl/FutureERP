@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% comment %}
+
+Main page to authenticate users.
+
+{% endcomment %}
+
+
+{% block content %}
+<h5>Login</h5>
+
+<section>
+{% if form.errors %}
+<p style="color:red">Your username and password didn't match, please try again.</p>
+{% endif %}
+
+{% include "popups/login.html" %}
+
+<!-- !!!!!!!!!!!!!! LOGIN MODAL ENDS HERE !!!!!!!!!!!!!-->
+{% endblock %}
+
+{% block footer %}
+<title>FutureERP | Login</title>
+<script type="text/javascript">
+    $(window).load(function(){
+            $('#LoginModal').modal('show');
+            });
+</script>
+{% endblock %}
