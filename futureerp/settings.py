@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 
     # futureerp apps
     'dashboard.apps.DashboardConfig',
+	'helpdesk.apps.HelpdeskConfig',
     'common.apps.CommonConfig',
     'notes.apps.NotesConfig',
     'logistics.apps.LogisticsConfig',	
