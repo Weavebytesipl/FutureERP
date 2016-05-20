@@ -110,3 +110,48 @@ def category_detail(request, pk):
         room.delete()
         return HttpResponse(status=204)
 
+
+@csrf_exempt
+def note_list(request):
+    """
+    List all code notes, or create a new note.
+    """
+    if request.method == 'GET':
+        notes = Note.objects.all()
+        serializer = NoteSerializer(notes, many=True)
+        return JSONResponse(serializer.data)
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = NoteSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JSONResponse(serializer.data, status=201)
+        return JSONResponse(serializer.errors, status=400)
+
+
+@csrf_exempt
+def note_detail(request, pk):
+    """
+    functions retrieves, updates or deletes a note.
+    """
+    try:
+        room = Note.objects.get(pk=pk)
+    except Note.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = NoteSerializer(room)
+        return JSONResponse(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = NoteSerializer(room, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JSONResponse(serializer.data)
+        return JSONResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        room.delete()
+        return HttpResponse(status=204)
