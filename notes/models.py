@@ -26,6 +26,7 @@ class Note(models.Model):
     model for a note
     """
     title = models.CharField(max_length=64)
+    user = models.ForeignKey(User)
     details = models.TextField()
     category = models.ForeignKey(Category)
     is_active = models.BooleanField(default=True)
