@@ -3,10 +3,10 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework.renderers import JSONRenderer
-from api.serializers import ProductSerializer
+from api.serializers import ProductSerializer, NoteSerializer, CategorySerializer
 
 from common.models import Product
-from notes.models import Category
+from notes.models import Category, Note
 
 
 class JSONResponse(HttpResponse):
