@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.contrib.auth import authenticate, login, logout
-from django.core.context_processors import csrf
+from django.template.context_processors import csrf
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 
