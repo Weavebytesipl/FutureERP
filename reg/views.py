@@ -13,6 +13,16 @@ def regform(request):
         # is_valid validates a form and returns True if it is valid and
         # False if it is invalid.
         if form.is_valid():
+            # ensure that username is unique
+            try:
+                if User.objects.get(username=form.cleaned_data['username']):
+                    message = "Username already exists !!!"
+                    return render(request, "login.html", {"message": message, "register": "register"} )
+            except:
+                pass
+                    
+                
+            # registering new username
             user = User.objects.create_user(
                     username=form.cleaned_data['username'],
                     password=form.cleaned_data['password'],
