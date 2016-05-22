@@ -1,0 +1,116 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <script src={% static "js/jquery-1.11.2.min.js" %}></script>
+        <script src={% static "js/login.js" %}></script>
+        <script src={% static "js/bootstrap.min.js" %}></script>
+        <script src={% static "js/sidebar_menu.js" %}></script>
+        <link href={% static "css/bootstrap.min.css" %} rel="stylesheet">
+        <link href={% static "css/login.css" %} rel="stylesheet">
+        <link href={% static "css/simple-sidebar.css" %} rel="stylesheet">
+        <link href={% static "font-awesome-4.3.0/css/font-awesome.min.css" %} rel="stylesheet">
+    </head>
+    <body >
+
+        <center><img src={% static "images/logo.png" %} /></center>
+        <br><br>
+
+        {% if message %}
+        <center><span id="message">
+                {% if error %}
+                <p class="text-danger">{{ message }} </p>
+                {% else %}
+                <p class="text-success">{{ message }} </p>
+                {% endif %}
+            </span><center>
+        {% endif %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="panel panel-login">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <a href="#" class="active" id="login-form-link">Login</a>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a href="#" id="register-form-link">Register</a>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form id="login-form" action="/login/" method="post" role="form" style="display: block;">{% csrf_token %}
+                                        <div class="form-group">
+                                            <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-sm-offset-3">
+                                                    <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="text-center">
+                                                        <a href="#" tabindex="5" class="forgot-password">Forgot Password?</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {% if next %}
+                                        <input type="hidden" name="next" value="{{ next }}" />
+                                        {% else %}
+                                        <input type="hidden" name="next" value="/" />
+                                        {% endif %}
+                                    </form>
+                                    <form id="register-form" action="/register/" method="post" role="form" style="display: none;">{% csrf_token %}
+                                        <div class="form-group">
+                                            <input type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="What is your name ?" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Choose a username" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password2" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-sm-offset-3">
+                                                    <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <!-- if register is passed to template, then show registration form -->
+    {% if register %}
+    <script>
+		$("#register-form").delay(10).fadeIn(10);
+ 		$("#login-form").fadeOut(10);
+		$('#login-form-link').removeClass('active');
+    </script>
+    {% endif %}
+</html>
