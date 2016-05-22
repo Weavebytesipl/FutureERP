@@ -17,7 +17,7 @@ def regform(request):
             try:
                 if User.objects.get(username=form.cleaned_data['username']):
                     message = "Username already exists !!!"
-                    return render(request, "login.html", {"message": message, "register": "register"} )
+                    return render(request, "login.html", {"message": message, "register": "register", "error": 1} )
             except:
                 pass
                     
@@ -33,7 +33,7 @@ def regform(request):
         else:
             # sending back error codes for "Invalid form"
             message = "Invalid entires, try again !!!"
-            return render(request, "login.html", {"message": message, "register": "register"} )
+            return render(request, "login.html", {"message": message, "register": "register", "error": 1} )
  
     # This means that the request is a GET request. So we need to
     # create an instance of the RegistrationForm class and render it in

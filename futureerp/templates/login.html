@@ -17,7 +17,11 @@
 
         {% if message %}
         <center><span id="message">
+                {% if error %}
+                <p class="text-danger">{{ message }} </p>
+                {% else %}
                 <p class="text-success">{{ message }} </p>
+                {% endif %}
             </span><center>
         {% endif %}
         <div class="container">

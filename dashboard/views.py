@@ -22,7 +22,8 @@ def login_page(request):
     :return: django HttpResponse
     """
 
-    state = ""
+    message = None
+    error = None
     username = password = ''
     form = LoginForm()
 
@@ -46,15 +47,21 @@ def login_page(request):
             if user.is_active:
                 login(request, user)
                 state = "You're successfully logged in!"
+
                 # redirect after post
-                print "--- redirecting ---"
                 return HttpResponseRedirect(next_page)
             else:
-                state = "Your account is not active, please contact the site admin."
+                message = "Your account is not active, please contact the site admin."
+                error = 1
         else:
-            state = "Your username and/or password were incorrect."
+            message = "Your username and/or password were incorrect."
+            error = 1
 
-    c = {'state': state, 'username': username, 'form': form, 'next': next_page}
+    c = {'username': username, 'form': form, 'next': next_page}
+    if message:
+        c.update({"message": message})
+    if error:
+        c.update({"error": error})
     c.update(csrf(request))
 
     return render_to_response('login.html', c)
