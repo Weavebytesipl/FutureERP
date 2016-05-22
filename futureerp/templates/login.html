@@ -94,4 +94,13 @@
             </div>
         </div>
     </body>
+
+    <!-- if register is passed to template, then show registration form -->
+    {% if register %}
+    <script>
+		$("#register-form").delay(10).fadeIn(10);
+ 		$("#login-form").fadeOut(10);
+		$('#login-form-link').removeClass('active');
+    </script>
+    {% endif %}
 </html>

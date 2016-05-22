@@ -35,4 +35,7 @@ def regform(request):
     # be rendered with the entered data and error messages. Otherwise an empty
     # form will be rendered. Check the comments in the registration_form.html template
     # to understand how this is done.
-    return render(request, "login.html", { "form" : form })
+
+    # NOTE
+    # pass register value to template so that template can show register form
+    return render(request, "login.html", { "form" : form, "register": "register" })
