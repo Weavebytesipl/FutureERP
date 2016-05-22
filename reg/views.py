@@ -18,7 +18,11 @@ def regform(request):
                     password=form.cleaned_data['password'],
                     email=form.cleaned_data['email']
                     )
-        return render(request, "reg/success.html")
+            return render(request, "reg/success.html")
+        else:
+            print "Invalid form"
+            #FIXME send back error codes
+            print form.errors
  
     # This means that the request is a GET request. So we need to
     # create an instance of the RegistrationForm class and render it in
@@ -31,4 +35,4 @@ def regform(request):
     # be rendered with the entered data and error messages. Otherwise an empty
     # form will be rendered. Check the comments in the registration_form.html template
     # to understand how this is done.
-    return render(request, "reg/registration_form.html", { "form" : form })
+    return render(request, "login.html", { "form" : form })
