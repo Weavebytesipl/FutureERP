@@ -1,12 +1,14 @@
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.template.context_processors import csrf
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 
 from dashboard.forms import LoginForm
 
+@login_required
 def home(request):	
     return render_to_response('index.html', context_instance=RequestContext(request))
 
@@ -27,6 +29,8 @@ def login_page(request):
     # default next page is index page
     next_page = "/"
 
+    print request
+
     # getting next page in get request
     if request.GET:
         next_page = request.GET.get('next')
@@ -43,6 +47,7 @@ def login_page(request):
                 login(request, user)
                 state = "You're successfully logged in!"
                 # redirect after post
+                print "--- redirecting ---"
                 return HttpResponseRedirect(next_page)
             else:
                 state = "Your account is not active, please contact the site admin."
@@ -52,7 +57,6 @@ def login_page(request):
     c = {'state': state, 'username': username, 'form': form, 'next': next_page}
     c.update(csrf(request))
 
-    #return render_to_response('auth.html', c)
     return render_to_response('login.html', c)
 
 
