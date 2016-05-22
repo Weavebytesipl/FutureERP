@@ -13,6 +13,7 @@ $(function() {
 		$('#register-form-link').removeClass('active');
 		$(this).addClass('active');
 		e.preventDefault();
+                $("#message").html('');
 	});
 	$('#register-form-link').click(function(e) {
 		$("#register-form").delay(100).fadeIn(100);
@@ -20,7 +21,9 @@ $(function() {
 		$('#login-form-link').removeClass('active');
 		$(this).addClass('active');
 		e.preventDefault();
+                $("#message").html('');
 	});
+
 
 });
 

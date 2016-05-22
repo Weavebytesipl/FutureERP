@@ -18,7 +18,8 @@ def regform(request):
                     password=form.cleaned_data['password'],
                     email=form.cleaned_data['email']
                     )
-            return render(request, "reg/success.html")
+            message = "Registration successful, try logging now..."
+            return render(request, "login.html", {"message": message} )
         else:
             print "Invalid form"
             #FIXME send back error codes

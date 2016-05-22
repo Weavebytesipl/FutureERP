@@ -14,6 +14,12 @@
 
         <center><img src={% static "images/logo.png" %} /></center>
         <br><br>
+
+        {% if message %}
+        <center><span id="message">
+                <p class="text-success">{{ message }} </p>
+            </span><center>
+        {% endif %}
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
