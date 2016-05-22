@@ -31,9 +31,9 @@ def regform(request):
             message = "Registration successful, try logging now..."
             return render(request, "login.html", {"message": message} )
         else:
-            print "Invalid form"
-            #FIXME send back error codes
-            print form.errors
+            # sending back error codes for "Invalid form"
+            message = "Invalid entires, try again !!!"
+            return render(request, "login.html", {"message": message, "register": "register"} )
  
     # This means that the request is a GET request. So we need to
     # create an instance of the RegistrationForm class and render it in
