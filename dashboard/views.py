@@ -52,7 +52,8 @@ def login_page(request):
     c = {'state': state, 'username': username, 'form': form, 'next': next_page}
     c.update(csrf(request))
 
-    return render_to_response('auth.html', c)
+    #return render_to_response('auth.html', c)
+    return render_to_response('login.html', c)
 
 
 def logout_page(request):
