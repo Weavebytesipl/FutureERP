@@ -17,6 +17,10 @@ ERP project covering various modules like payroll, point of sales, calendar, ass
 
   This module handles suppliers, customers, staff, products, payments  etc.
 
+#### Notes Module
+
+This is used for storing personal notes in categories for sorting and convenience.
+
 #### Preferences Module
 
 This is used for storing personal preferences of user for dashboard in database.
