@@ -1,13 +1,18 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 
 from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
 from api.serializers import ProductSerializer, NoteSerializer, CategorySerializer
 
 from common.models import Product
 from notes.models import Category, Note
 
+# common error dict
+err_post = {"error": 1, "message:": "only POST request is supported"}
 
 class JSONResponse(HttpResponse):
     """
@@ -18,6 +23,55 @@ class JSONResponse(HttpResponse):
         kwargs['content_type'] = 'application/json'
         super(JSONResponse, self).__init__(content, **kwargs)
 
+@csrf_exempt
+def login(request):
+    """
+    handle login post request and sends back JSON response
+    """
+    if request.method == 'POST':
+        resp = {"error": 1, "message": "invalid username or password"}
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            resp["error"] = 0
+            resp["user_id"] = user.id
+            resp["email"] = user.email
+            resp["message"] = "login successfull"
+        return JSONResponse(resp, status=400)
+
+
+@csrf_exempt
+def register(request):
+    """
+    handle register user post request and sends back JSON response
+    """
+    if not request.method == 'POST':
+        return JSONResponse(err_post, status=400)
+
+    resp = {"error": 1, "message": ""}
+
+    username = request.POST['username']
+    password = request.POST['password']
+    email = request.POST['email']
+
+    # checking availability of username
+    try:
+        if User.objects.get(username=username):
+            resp["message"] = "Username already exists !!!"
+            return JSONResponse(resp, status=400)
+    except:
+        pass
+
+    # registering new user
+    user = User.objects.create_user(
+            username=username,
+            password=password,
+            email=email
+            )
+    resp["error"] = 0
+    resp["message"] = "Registration successful"
+    return JSONResponse(resp, status=400)
 
 @csrf_exempt
 def product_list(request):
