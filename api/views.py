@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
@@ -10,6 +11,8 @@ from api.serializers import ProductSerializer, NoteSerializer, CategorySerialize
 from common.models import Product
 from notes.models import Category, Note
 
+# common error dict
+err_post = {"error": 1, "message:": "only POST request is supported"}
 
 class JSONResponse(HttpResponse):
     """
@@ -38,6 +41,38 @@ def login(request):
             resp["message"] = "login successfull"
         return JSONResponse(resp, status=400)
 
+
+@csrf_exempt
+def register(request):
+    """
+    handle register user post request and sends back JSON response
+    """
+    if not request.method == 'POST':
+        return JSONResponse(err_post, status=400)
+
+    resp = {"error": 1, "message": ""}
+
+    username = request.POST['username']
+    password = request.POST['password']
+    email = request.POST['email']
+
+    # checking availability of username
+    try:
+        if User.objects.get(username=username):
+            resp["message"] = "Username already exists !!!"
+            return JSONResponse(resp, status=400)
+    except:
+        pass
+
+    # registering new user
+    user = User.objects.create_user(
+            username=username,
+            password=password,
+            email=email
+            )
+    resp["error"] = 0
+    resp["message"] = "Registration successful"
+    return JSONResponse(resp, status=400)
 
 @csrf_exempt
 def product_list(request):
