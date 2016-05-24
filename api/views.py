@@ -28,7 +28,6 @@ def login(request):
     """
     handle login post request and sends back JSON response
     """
-    print request.POST
     if request.method == 'POST':
         resp = {"error": 1, "message": "invalid username or password"}
         username = request.POST['username']
