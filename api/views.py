@@ -85,12 +85,12 @@ def category_list(request, user_id):
 
 
 @csrf_exempt
-def category_detail(request, pk):
+def category_detail(request, user_id, pk):
     """
     functions retrieves, updates or deletes a category.
     """
     try:
-        room = Category.objects.get(pk=pk)
+        room = Category.objects.get(user=user_id, pk=pk)
     except Category.DoesNotExist:
         return HttpResponse(status=404)
 
