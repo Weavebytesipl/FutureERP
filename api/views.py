@@ -66,12 +66,12 @@ def product_detail(request, pk):
 
 
 @csrf_exempt
-def category_list(request):
+def category_list(request, user_id):
     """
     List all code categories, or create a new category.
     """
     if request.method == 'GET':
-        categories = Category.objects.all()
+        categories = Category.objects.filter(user=user_id)
         serializer = CategorySerializer(categories, many=True)
         return JSONResponse(serializer.data)
 
@@ -85,12 +85,12 @@ def category_list(request):
 
 
 @csrf_exempt
-def category_detail(request, pk):
+def category_detail(request, user_id, pk):
     """
     functions retrieves, updates or deletes a category.
     """
     try:
-        room = Category.objects.get(pk=pk)
+        room = Category.objects.get(user=user_id, pk=pk)
     except Category.DoesNotExist:
         return HttpResponse(status=404)
 
@@ -112,12 +112,12 @@ def category_detail(request, pk):
 
 
 @csrf_exempt
-def note_list(request):
+def note_list(request, user_id):
     """
     List all code notes, or create a new note.
     """
     if request.method == 'GET':
-        notes = Note.objects.all()
+        notes = Note.objects.filter(user=user_id)
         serializer = NoteSerializer(notes, many=True)
         return JSONResponse(serializer.data)
 
@@ -131,27 +131,27 @@ def note_list(request):
 
 
 @csrf_exempt
-def note_detail(request, pk):
+def note_detail(request, user_id, pk):
     """
     functions retrieves, updates or deletes a note.
     """
     try:
-        room = Note.objects.get(pk=pk)
+        note = Note.objects.get(user=user_id, pk=pk)
     except Note.DoesNotExist:
         return HttpResponse(status=404)
 
     if request.method == 'GET':
-        serializer = NoteSerializer(room)
+        serializer = NoteSerializer(note)
         return JSONResponse(serializer.data)
 
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
-        serializer = NoteSerializer(room, data=data)
+        serializer = NoteSerializer(note, data=data)
         if serializer.is_valid():
             serializer.save()
             return JSONResponse(serializer.data)
         return JSONResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':
-        room.delete()
+        note.delete()
         return HttpResponse(status=204)

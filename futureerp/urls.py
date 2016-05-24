@@ -59,8 +59,8 @@ urlpatterns = [
     url(r'^products/(?P<pk>[0-9]+)/$', api_views.product_detail),
 
     # apis for notes - category and notes models
-    url(r'^notes/categories/$', api_views.category_list),
-    url(r'^notes/categories/(?P<pk>[0-9]+)/$', api_views.category_detail),
-    url(r'^notes/notes/$', api_views.note_list),
-    url(r'^notes/notes/(?P<pk>[0-9]+)/$', api_views.note_detail),
+    url(r'^notes/categories/(?P<user_id>[0-9]+)/$', api_views.category_list),
+    url(r'^notes/categories/(?P<user_id>[0-9]+)/(?P<pk>[0-9]+)/$', api_views.category_detail),
+    url(r'^notes/notes/(?P<user_id>[0-9]+)/$', api_views.note_list),
+    url(r'^notes/notes/(?P<user_id>[0-9]+)/(?P<pk>[0-9]+)/$', api_views.note_detail),
 ]
