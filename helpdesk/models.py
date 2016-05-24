@@ -41,6 +41,7 @@ class Complaint(models.Model):
     sender = models.ForeignKey(User, related_name='Sender')
     to = models.ForeignKey(User, related_name='To')
     date = models.DateTimeField(auto_now_add=True, verbose_name=_('Date'))
+    is_active = models.BooleanField(default=True, verbose_name=_('Pending'))
 
     def __unicode__(self):
         return self.title
