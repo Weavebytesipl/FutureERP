@@ -66,12 +66,12 @@ def product_detail(request, pk):
 
 
 @csrf_exempt
-def category_list(request):
+def category_list(request, user_id):
     """
     List all code categories, or create a new category.
     """
     if request.method == 'GET':
-        categories = Category.objects.all()
+        categories = Category.objects.filter(user=user_id)
         serializer = CategorySerializer(categories, many=True)
         return JSONResponse(serializer.data)
 
