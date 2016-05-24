@@ -131,12 +131,12 @@ def note_list(request, user_id):
 
 
 @csrf_exempt
-def note_detail(request, pk):
+def note_detail(request, user_id, pk):
     """
     functions retrieves, updates or deletes a note.
     """
     try:
-        room = Note.objects.get(pk=pk)
+        room = Note.objects.get(user=user_id, pk=pk)
     except Note.DoesNotExist:
         return HttpResponse(status=404)
 
