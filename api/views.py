@@ -35,6 +35,7 @@ def login(request):
             resp["error"] = 0
             resp["user_id"] = user.id
             resp["email"] = user.email
+            resp["message"] = "login successfull"
         return JSONResponse(resp, status=400)
 
 
