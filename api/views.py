@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate
 
 from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
 from api.serializers import ProductSerializer, NoteSerializer, CategorySerializer
 
 from common.models import Product
@@ -17,6 +19,23 @@ class JSONResponse(HttpResponse):
         content = JSONRenderer().render(data)
         kwargs['content_type'] = 'application/json'
         super(JSONResponse, self).__init__(content, **kwargs)
+
+@csrf_exempt
+def login(request):
+    """
+    handle login post request and sends back JSON response
+    """
+    print request.POST
+    if request.method == 'POST':
+        resp = {"error": 1, "message": "invalid username or password"}
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            resp["error"] = 0
+            resp["user_id"] = user.id
+            resp["email"] = user.email
+        return JSONResponse(resp, status=400)
 
 
 @csrf_exempt

@@ -49,10 +49,13 @@ urlpatterns = [
     # registration
     url(r'register/$', reg_views.regform, name='regform'),
 
-    # django rest framework urls
+    ##############################
+    # django rest framework urls #
+    ##############################
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^products/$', api_views.product_list),
     url(r'^products/(?P<pk>[0-9]+)/$', api_views.product_detail),
+    url(r'^api/login/$', api_views.login),
 
     # apis for notes - category and notes models
     url(r'^notes/categories/(?P<user_id>[0-9]+)/$', api_views.category_list),
