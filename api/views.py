@@ -136,22 +136,22 @@ def note_detail(request, user_id, pk):
     functions retrieves, updates or deletes a note.
     """
     try:
-        room = Note.objects.get(user=user_id, pk=pk)
+        note = Note.objects.get(user=user_id, pk=pk)
     except Note.DoesNotExist:
         return HttpResponse(status=404)
 
     if request.method == 'GET':
-        serializer = NoteSerializer(room)
+        serializer = NoteSerializer(note)
         return JSONResponse(serializer.data)
 
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
-        serializer = NoteSerializer(room, data=data)
+        serializer = NoteSerializer(note, data=data)
         if serializer.is_valid():
             serializer.save()
             return JSONResponse(serializer.data)
         return JSONResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':
-        room.delete()
+        note.delete()
         return HttpResponse(status=204)
