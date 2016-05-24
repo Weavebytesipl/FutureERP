@@ -112,12 +112,12 @@ def category_detail(request, user_id, pk):
 
 
 @csrf_exempt
-def note_list(request):
+def note_list(request, user_id):
     """
     List all code notes, or create a new note.
     """
     if request.method == 'GET':
-        notes = Note.objects.all()
+        notes = Note.objects.filter(user=user_id)
         serializer = NoteSerializer(notes, many=True)
         return JSONResponse(serializer.data)
 
