@@ -6,11 +6,18 @@ from django.template.context_processors import csrf
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 
+from helpdesk.models import Complaint
+
+
 from dashboard.forms import LoginForm
 
 @login_required
 def home(request):	
-    return render_to_response('index.html', context_instance=RequestContext(request))
+    pending_complaints_count = Complaint.objects.filter(is_active=True).count()
+    total_complaints_count = Complaint.objects.all().count()
+    complaints_progress = 100 *(total_complaints_count-pending_complaints_count)/total_complaints_count
+    dash_data ={ 'pending_complaints_count' : pending_complaints_count , 'total_complaints_count' : total_complaints_count, 'complaints_progress' : complaints_progress, 'user' : request.user }
+    return render_to_response('index.html', dash_data, context_instance=RequestContext(request))
 
 def login_page(request):
     """

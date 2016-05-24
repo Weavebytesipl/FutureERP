@@ -6,6 +6,32 @@
 
 {% block content %}
 
-index page
+<h4 align='center'> Welcome <span style='color:red;'>{{ user }}</span></h4>
+
+<br><br>
+<table class='.table table-bordered' width="100%">
+	<thead>
+			<th></th>
+			<th></th>
+			<th></th>
+	</thead>
+	<tbody>
+		<tr align='center'>
+			<td width="10%">1. </td>
+			<td width="60%"><b> Total Complaints <b></td>
+			<td width="30%"> {{ total_complaints_count }}</td>
+		</tr>
+		<tr align='center'>
+			<td width="10%">2. </td>
+			<td width="60%"> <b>Pending Complaints<b></td>
+			<td width="30%"> {{ pending_complaints_count }}</td>
+		</tr>
+		<tr align='center'>
+			<td width="10%">3. </td>
+			<td width="60%"> <b>Complaints Progress<b></td>
+			<td width="30%"> {{ complaints_progress }}%</td>
+		</tr>	
+	</tbody>
+</table>
 
 {% endblock %}
