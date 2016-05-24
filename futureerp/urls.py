@@ -23,12 +23,8 @@ import api.views as api_views
 
 from rest_framework import routers, serializers, viewsets
 
+from api.serializers import UserSerializer
 
-# serializers define the api representation.
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id', 'url', 'username', 'email', 'is_staff')
 
 # ViewSets define the view behavior.
 class UserViewSet(viewsets.ModelViewSet):
