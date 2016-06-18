@@ -28,7 +28,7 @@ class Transaction(models.Model):
 	"""
 	customer = models.ForeignKey(Customer)	
 	staff = models.ForeignKey(Staff)
-	
+	product = models.ForeignKey(Product)
 	# time stamps !
 	created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Created at'))
 
@@ -40,7 +40,7 @@ class Transaction(models.Model):
 		"""
 		function returns unicode representation of 
 		"""
-		return "%s" % self.customer
+		return "%s" % self.product
 
 
 class PaymentMethod(models.Model):

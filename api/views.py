@@ -79,7 +79,7 @@ def product_list(request):
     List all code products, or create a new product.
     """
     if request.method == 'GET':
-        products = Product.objects.all()
+        products = Product.objects.all()	
         serializer = ProductSerializer(products, many=True)
         return JSONResponse(serializer.data)
 
