@@ -9,6 +9,7 @@
 <h4 align='center'> Welcome <span style='color:red;'>{{ user }}</span></h4>
 
 <br><br>
+<div style="display:none;">
 <table class='.table table-bordered' width="100%">
 	<thead>
 			<th></th>
@@ -33,5 +34,52 @@
 		</tr>	
 	</tbody>
 </table>
+</div>
+ <div style="width:auto;height:auto;">
+        <!canvas id="line" style = "margin-bottom : 50px;background: #ffe6e6;"><!/canvas>
+	 <canvas id="product" style = "margin-top : 50px;"></canvas>
+    </div>
+    <br>
+    <br>
 
+{% endblock %}
+
+{% block bodyend %}
+  <script>
+
+
+var config = {
+        type: 'pie',
+        data: {
+            datasets: [
+            {
+                data: [
+                    {% for transaction in transactions %}
+                    {{ transaction.retail_price }}, 
+                    {% endfor %}
+                ],
+                backgroundColor: [
+                    "#F7464A",
+                    "#46BFBD",
+                    "#FDB45C",
+                    "#949FB1",
+                    "#4D5360",
+                ],
+            }],
+            labels: [
+                {% for transaction in transactions %}
+                    "{{ transaction.product.name }}", 
+                    {% endfor %}
+            ]
+        },
+        options: {
+            responsive: true
+        }
+    };
+
+window.onload = function() {
+    var ctx = document.getElementById('product').getContext('2d');
+        window.myPie = new Chart(ctx, config);
+    };
+    </script>
 {% endblock %}

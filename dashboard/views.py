@@ -7,9 +7,10 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 
 from helpdesk.models import Complaint
-
+from pos.models import Transaction
 
 from dashboard.forms import LoginForm
+
 
 @login_required
 def home(request):	
@@ -18,7 +19,11 @@ def home(request):
     complaints_progress = 0
     if total_complaints_count:
         complaints_progress = 100 *(total_complaints_count-pending_complaints_count)/total_complaints_count
-    dash_data ={ 'pending_complaints_count' : pending_complaints_count , 'total_complaints_count' : total_complaints_count, 'complaints_progress' : complaints_progress, 'user' : request.user }
+
+
+    dash_data ={ 'pending_complaints_count' : pending_complaints_count , 'total_complaints_count' : total_complaints_count, 'complaints_progress' : complaints_progress, 'user' : request.user,  'transactions': Transaction.objects.all() }
+    #all_transactions = Transaction.objects.all()
+    #print all_transactions
     return render_to_response('index.html', dash_data, context_instance=RequestContext(request))
 
 def login_page(request):
