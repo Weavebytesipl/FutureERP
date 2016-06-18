@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'reg.apps.RegConfig',	
     'preferences.apps.PreferencesConfig',
     'api.apps.ApiConfig',
+     'vocabpedia.apps.VocabpediaConfig',
 
     # django apps
     'django.contrib.admin',
