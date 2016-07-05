@@ -39,7 +39,7 @@ INSTALLED_APPS = [
 
     # futureerp apps
     'dashboard.apps.DashboardConfig',
-	'helpdesk.apps.HelpdeskConfig',
+    'helpdesk.apps.HelpdeskConfig',
     'common.apps.CommonConfig',
     'notes.apps.NotesConfig',
     'logistics.apps.LogisticsConfig',	
@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'reg.apps.RegConfig',	
     'preferences.apps.PreferencesConfig',
     'api.apps.ApiConfig',
-     'vocabpedia.apps.VocabpediaConfig',
 
     # django apps
     'django.contrib.admin',
